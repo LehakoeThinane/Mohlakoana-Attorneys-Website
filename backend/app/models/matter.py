@@ -35,7 +35,13 @@ class Matter(Base):
     reference: Mapped[str] = mapped_column(String(50), unique=True, nullable=False)
     title: Mapped[str] = mapped_column(String(255), nullable=False)
     status: Mapped[MatterStatus] = mapped_column(
-        Enum(MatterStatus, name="matter_status"), nullable=False, default=MatterStatus.OPENED
+        # values_callable is required here: SQLAlchemy's Enum type binds the
+        # Python member NAME ("OPENED") by default, not its value ("opened").
+        # The Postgres enum type's labels are lowercase (see the 0001
+        # migration), so without this every insert/update fails.
+        Enum(MatterStatus, name="matter_status", values_callable=lambda enum_cls: [e.value for e in enum_cls]),
+        nullable=False,
+        default=MatterStatus.OPENED,
     )
 
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())

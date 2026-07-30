@@ -24,3 +24,7 @@ class RefreshRequest(BaseModel):
 class AcceptInviteRequest(BaseModel):
     invite_token: str
     password: str = Field(max_length=_PASSWORD_MAX_LENGTH)
+
+
+class RequestPasswordResetRequest(BaseModel):
+    email: EmailStr
