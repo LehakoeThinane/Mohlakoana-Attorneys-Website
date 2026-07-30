@@ -55,3 +55,11 @@ def update_matter_status(
 @router.get("/mine", response_model=list[MatterOut])
 def list_my_matters(db: Session = Depends(get_db), client=Depends(get_current_client)) -> list[Matter]:
     return db.query(Matter).filter(Matter.client_id == client.id).order_by(Matter.created_at.desc()).all()
+
+
+@router.get("/mine/{matter_id}", response_model=MatterOut)
+def get_my_matter(matter_id: uuid.UUID, db: Session = Depends(get_db), client=Depends(get_current_client)) -> Matter:
+    matter = db.query(Matter).filter(Matter.id == matter_id, Matter.client_id == client.id).first()
+    if matter is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Matter not found")
+    return matter
