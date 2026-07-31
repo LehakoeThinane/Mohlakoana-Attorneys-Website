@@ -34,7 +34,7 @@ export async function submitContactForm(
       return { status: "error", message: "Something went wrong. Please try again or call us directly." };
     }
 
-    return { status: "success", message: "Thank you — we'll be in touch shortly." };
+    return { status: "success", message: "Thank you. We'll be in touch shortly." };
   } catch {
     return { status: "error", message: "Something went wrong. Please try again or call us directly." };
   }

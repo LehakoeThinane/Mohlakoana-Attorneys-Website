@@ -10,7 +10,7 @@ const NAV_LINKS = [
 
 export function Header() {
   return (
-    <header className="border-b border-stone-200 bg-stone-900 text-amber-50">
+    <header className="glass-dark sticky top-0 z-50 border-b border-amber-500/20 text-amber-50">
       <div className="mx-auto flex w-full max-w-5xl flex-wrap items-center justify-between gap-4 px-6 py-4">
         <Link href="/" className="flex flex-col leading-tight">
           <span className="text-lg font-semibold tracking-tight">{FIRM.name}</span>
@@ -18,13 +18,14 @@ export function Header() {
         </Link>
         <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
           {NAV_LINKS.map((link) => (
-            <Link key={link.href} href={link.href} className="hover:text-amber-300">
+            <Link key={link.href} href={link.href} className="group relative py-1">
               {link.label}
+              <span className="absolute inset-x-0 -bottom-0.5 h-px scale-x-0 bg-amber-400 transition-transform duration-300 group-hover:scale-x-100" />
             </Link>
           ))}
           <Link
             href="/portal/login"
-            className="rounded-md border border-amber-200 px-3 py-1.5 hover:border-amber-300 hover:text-amber-300"
+            className="glow-gold rounded-md border border-amber-200/60 px-3 py-1.5 transition-colors hover:border-amber-300 hover:text-amber-300"
           >
             Client Portal
           </Link>

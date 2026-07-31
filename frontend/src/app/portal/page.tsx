@@ -24,7 +24,7 @@ export default async function PortalMattersPage() {
                 >
                   <span className="font-medium text-stone-900">{matter.title}</span>
                   <span className="text-sm text-stone-600">
-                    {matter.reference} — {STATUS_LABELS[matter.status]}
+                    {matter.reference} ({STATUS_LABELS[matter.status]})
                   </span>
                 </Link>
               </li>

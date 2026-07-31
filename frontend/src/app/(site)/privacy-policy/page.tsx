@@ -10,7 +10,7 @@ export default function PrivacyPolicyPage() {
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col gap-8 px-6 py-16">
       <div className="rounded-md border border-amber-300 bg-amber-100 px-4 py-3 text-sm text-amber-900">
-        <strong>Draft — pending director and legal review.</strong> This policy has not yet been signed off per
+        <strong>Draft: pending director and legal review.</strong> This policy has not yet been signed off per
         the firm&apos;s own compliance checklist and should not be relied on as final until reviewed by Mr
         Mohlakoana.
       </div>
@@ -49,8 +49,8 @@ export default function PrivacyPolicyPage() {
         <h2 className="text-xl font-semibold text-stone-900">4. Third-Party Processing</h2>
         <p className="text-stone-700">
           We use a third-party practice management system for administrative functions such as task tracking,
-          document handling, and invoicing. Only the limited information necessary for those functions — such
-          as your name, email address, and administrative task or invoice details — is shared with that system.
+          document handling, and invoicing. Only the limited information necessary for those functions, such
+          as your name, email address, and administrative task or invoice details, is shared with that system.
           Identifying information such as ID numbers, and the substantive details of your matter, are never
           shared with any third-party system and are held solely within the firm&apos;s own secure records.
         </p>

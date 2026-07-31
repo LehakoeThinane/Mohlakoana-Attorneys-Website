@@ -24,3 +24,89 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Glassmorphism — a frosted, semi-transparent surface that lets the
+   ambient glow behind it bleed through. Two variants: light glass for
+   cards on the cream background, dark glass for panels on charcoal. */
+.glass {
+  background: rgb(255 255 255 / 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgb(255 255 255 / 0.4);
+}
+
+.glass-dark {
+  background: rgb(28 25 23 / 0.82); /* stone-900 tint */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgb(255 255 255 / 0.08);
+}
+
+/* Gold glow — a soft ambient shadow used on hover/focus so interactive
+   elements feel lit from within rather than flatly bordered. */
+.glow-gold {
+  box-shadow: 0 0 0 1px rgb(180 83 9 / 0.15), 0 8px 30px -8px rgb(217 119 6 / 0.35);
+  transition: box-shadow 300ms ease, transform 300ms ease;
+}
+
+.glow-gold:hover {
+  box-shadow: 0 0 0 1px rgb(180 83 9 / 0.3), 0 12px 40px -6px rgb(217 119 6 / 0.55);
+}
+
+.glow-gold-static {
+  box-shadow: 0 0 40px -4px rgb(217 119 6 / 0.45);
+}
+
+/* Ambient background orbs — large, blurred, slowly drifting blobs of
+   brand gold behind hero/dark sections. Purely decorative; disabled
+   entirely under reduced-motion below. */
+.glow-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(60px);
+  pointer-events: none;
+  opacity: 0.5;
+  animation: orb-float 18s ease-in-out infinite;
+}
+
+.glow-orb-gold {
+  background: radial-gradient(circle at 30% 30%, rgb(251 191 36 / 0.55), transparent 70%);
+}
+
+.glow-orb-amber {
+  background: radial-gradient(circle at 30% 30%, rgb(217 119 6 / 0.45), transparent 70%);
+  animation-duration: 22s;
+  animation-direction: reverse;
+}
+
+@keyframes orb-float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(3%, 4%) scale(1.08);
+  }
+  66% {
+    transform: translate(-3%, -2%) scale(0.96);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .glow-orb {
+    animation: none;
+  }
+
+  .glow-gold,
+  .glow-gold:hover {
+    transition: none;
+  }
+}

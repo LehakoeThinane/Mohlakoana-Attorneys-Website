@@ -20,14 +20,14 @@ export default async function MatterDetailPage({ params }: { params: Promise<{ i
           </Link>
           <h1 className="text-2xl font-semibold text-stone-900">{matter.title}</h1>
           <p className="text-stone-600">
-            {matter.reference} — <span className="font-medium">{STATUS_LABELS[matter.status]}</span>
+            {matter.reference} (<span className="font-medium">{STATUS_LABELS[matter.status]}</span>)
           </p>
         </div>
 
         <section className="flex flex-col gap-2">
           <h2 className="text-lg font-semibold text-stone-900">Documents</h2>
           <p className="rounded-md border border-dashed border-stone-300 bg-white px-4 py-3 text-sm text-stone-500">
-            Document access is not yet available — this section will show documents once the BFP integration
+            Document access is not yet available. This section will show documents once the BFP integration
             (Phase 3) is complete.
           </p>
         </section>
@@ -35,7 +35,7 @@ export default async function MatterDetailPage({ params }: { params: Promise<{ i
         <section className="flex flex-col gap-2">
           <h2 className="text-lg font-semibold text-stone-900">Invoices</h2>
           <p className="rounded-md border border-dashed border-stone-300 bg-white px-4 py-3 text-sm text-stone-500">
-            Invoice and payment status is not yet available — this section will show invoices once the BFP
+            Invoice and payment status is not yet available. This section will show invoices once the BFP
             integration (Phase 3) is complete.
           </p>
         </section>

@@ -5,6 +5,9 @@ import { submitContactForm } from "./actions";
 
 const initialState = { status: "idle" as const, message: "" };
 
+const inputClasses =
+  "rounded-md border border-stone-300 bg-white/80 px-3 py-2 text-stone-900 transition-shadow duration-200 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-400/40";
+
 export function ContactForm() {
   const [state, formAction, pending] = useActionState(submitContactForm, initialState);
 
@@ -14,36 +17,19 @@ export function ContactForm() {
         <label htmlFor="full_name" className="text-sm font-medium text-stone-700">
           Full name
         </label>
-        <input
-          id="full_name"
-          name="full_name"
-          type="text"
-          required
-          className="rounded-md border border-stone-300 px-3 py-2 text-stone-900 focus:border-amber-700 focus:outline-none"
-        />
+        <input id="full_name" name="full_name" type="text" required className={inputClasses} />
       </div>
       <div className="flex flex-col gap-1">
         <label htmlFor="email" className="text-sm font-medium text-stone-700">
           Email
         </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          required
-          className="rounded-md border border-stone-300 px-3 py-2 text-stone-900 focus:border-amber-700 focus:outline-none"
-        />
+        <input id="email" name="email" type="email" required className={inputClasses} />
       </div>
       <div className="flex flex-col gap-1">
         <label htmlFor="phone" className="text-sm font-medium text-stone-700">
           Phone (optional)
         </label>
-        <input
-          id="phone"
-          name="phone"
-          type="tel"
-          className="rounded-md border border-stone-300 px-3 py-2 text-stone-900 focus:border-amber-700 focus:outline-none"
-        />
+        <input id="phone" name="phone" type="tel" className={inputClasses} />
       </div>
       <p className="text-xs text-stone-500">
         By submitting this form you consent to Mohlakoana Attorneys contacting you about your enquiry, in
@@ -52,7 +38,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={pending}
-        className="rounded-md bg-stone-900 px-4 py-2 font-medium text-amber-50 transition-colors hover:bg-stone-800 disabled:opacity-60"
+        className="glow-gold rounded-md bg-stone-900 px-4 py-2 font-medium text-amber-50 transition-transform duration-300 hover:-translate-y-0.5 hover:bg-stone-800 disabled:opacity-60"
       >
         {pending ? "Sending..." : "Send enquiry"}
       </button>

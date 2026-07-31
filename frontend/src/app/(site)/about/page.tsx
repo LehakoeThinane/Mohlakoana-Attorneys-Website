@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { FIRM } from "@/lib/firm";
+import { Reveal } from "../reveal";
 
 export const metadata: Metadata = {
   title: "About Us | Mohlakoana Attorneys",
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col gap-16 px-6 py-16">
-      <section className="flex flex-col gap-4">
+      <Reveal className="flex flex-col gap-4">
         <h1 className="text-3xl font-semibold text-stone-900">About the Firm</h1>
         <p className="text-stone-700">
           {FIRM.name} is a commercial law firm based in the heart of Pretoria, Gauteng Province. The firm
@@ -26,14 +27,14 @@ export default function AboutPage() {
           immigration, family and matrimonial law, governance risk and compliance services, and Court
           appearances.
         </p>
-      </section>
+      </Reveal>
 
-      <section className="flex flex-col gap-4">
+      <Reveal className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold text-stone-900">Director</h2>
-        <div className="rounded-md border border-stone-200 bg-white p-6">
+        <div className="glow-gold glass rounded-md p-6">
           <h3 className="text-lg font-semibold text-stone-900">{FIRM.director.name}</h3>
           <p className="mt-1 text-sm text-stone-600">
-            Admitted Attorney of the High Court of South Africa — LPC number: {FIRM.director.lpcNumber}
+            Admitted Attorney of the High Court of South Africa, LPC number: {FIRM.director.lpcNumber}
           </p>
 
           <h4 className="mt-4 text-sm font-semibold text-stone-900">Qualifications</h4>
@@ -49,9 +50,9 @@ export default function AboutPage() {
             consistency and compliance with the Legal Practice Act and Rules of the Court.
           </p>
         </div>
-      </section>
+      </Reveal>
 
-      <section className="flex flex-col gap-4">
+      <Reveal className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold text-stone-900">Support Staff</h2>
         <p className="text-stone-700">
           In order to ensure that the mandates of clients are executed expeditiously and with due diligence, Mr
@@ -61,28 +62,32 @@ export default function AboutPage() {
           Mrs Mohlakoana ensures that all mandates and instructions are brought to Mr Mohlakoana&apos;s attention
           without delay, treated with urgency, and that clients are kept abreast of developments in their cases.
         </p>
-      </section>
+      </Reveal>
 
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold text-stone-900">Our Approach</h2>
+        <Reveal>
+          <h2 className="text-2xl font-semibold text-stone-900">Our Approach</h2>
+        </Reveal>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {FIRM.approach.map((pillar) => (
-            <div key={pillar.title} className="rounded-md border border-stone-200 bg-white p-5">
-              <h3 className="font-semibold text-stone-900">{pillar.title}</h3>
-              <p className="mt-1 text-sm text-stone-600">{pillar.description}</p>
-            </div>
+          {FIRM.approach.map((pillar, i) => (
+            <Reveal key={pillar.title} delay={i * 0.08}>
+              <div className="glow-gold glass h-full rounded-md p-5">
+                <h3 className="font-semibold text-stone-900">{pillar.title}</h3>
+                <p className="mt-1 text-sm text-stone-600">{pillar.description}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </section>
 
-      <section className="flex flex-col gap-3">
+      <Reveal className="flex flex-col gap-3">
         <h2 className="text-2xl font-semibold text-stone-900">Compliance &amp; Accreditation</h2>
         <ul className="list-disc pl-5 text-stone-700">
           {FIRM.compliance.map((item) => (
             <li key={item}>{item}</li>
           ))}
         </ul>
-      </section>
+      </Reveal>
     </div>
   );
 }
