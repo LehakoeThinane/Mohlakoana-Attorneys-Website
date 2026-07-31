@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { FIRM } from "@/lib/firm";
+import { GlowOrbs } from "../glow-orbs";
 import { Reveal } from "../reveal";
 
 export const metadata: Metadata = {
@@ -29,28 +30,33 @@ export default function AboutPage() {
         </p>
       </Reveal>
 
-      <Reveal className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold text-stone-900">Director</h2>
-        <div className="glow-gold glass rounded-md p-6">
-          <h3 className="text-lg font-semibold text-stone-900">{FIRM.director.name}</h3>
-          <p className="mt-1 text-sm text-stone-600">
-            Admitted Attorney of the High Court of South Africa, LPC number: {FIRM.director.lpcNumber}
-          </p>
+      <div className="flex flex-col gap-4">
+        <Reveal>
+          <h2 className="text-2xl font-semibold text-stone-900">Director</h2>
+        </Reveal>
+        <Reveal className="relative overflow-hidden rounded-md">
+          <GlowOrbs variant="light" />
+          <div className="glow-gold glass relative z-10 rounded-md p-6">
+            <h3 className="text-lg font-semibold text-stone-900">{FIRM.director.name}</h3>
+            <p className="mt-1 text-sm text-stone-600">
+              Admitted Attorney of the High Court of South Africa, LPC number: {FIRM.director.lpcNumber}
+            </p>
 
-          <h4 className="mt-4 text-sm font-semibold text-stone-900">Qualifications</h4>
-          <ul className="mt-2 list-disc pl-5 text-sm text-stone-700">
-            {FIRM.director.qualifications.map((q) => (
-              <li key={q}>{q}</li>
-            ))}
-          </ul>
+            <h4 className="mt-4 text-sm font-semibold text-stone-900">Qualifications</h4>
+            <ul className="mt-2 list-disc pl-5 text-sm text-stone-700">
+              {FIRM.director.qualifications.map((q) => (
+                <li key={q}>{q}</li>
+              ))}
+            </ul>
 
-          <p className="mt-4 text-sm text-stone-700">
-            Mr Mohlakoana supervises all matters undertaken by the firm. His practice focus includes{" "}
-            {FIRM.director.focus.toLowerCase()} All instructions are executed with direct oversight to ensure
-            consistency and compliance with the Legal Practice Act and Rules of the Court.
-          </p>
-        </div>
-      </Reveal>
+            <p className="mt-4 text-sm text-stone-700">
+              Mr Mohlakoana supervises all matters undertaken by the firm. His practice focus includes{" "}
+              {FIRM.director.focus.toLowerCase()} All instructions are executed with direct oversight to ensure
+              consistency and compliance with the Legal Practice Act and Rules of the Court.
+            </p>
+          </div>
+        </Reveal>
+      </div>
 
       <Reveal className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold text-stone-900">Support Staff</h2>
@@ -64,19 +70,22 @@ export default function AboutPage() {
         </p>
       </Reveal>
 
-      <section className="flex flex-col gap-4">
-        <Reveal>
-          <h2 className="text-2xl font-semibold text-stone-900">Our Approach</h2>
-        </Reveal>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {FIRM.approach.map((pillar, i) => (
-            <Reveal key={pillar.title} delay={i * 0.08}>
-              <div className="glow-gold glass h-full rounded-md p-5">
-                <h3 className="font-semibold text-stone-900">{pillar.title}</h3>
-                <p className="mt-1 text-sm text-stone-600">{pillar.description}</p>
-              </div>
-            </Reveal>
-          ))}
+      <section className="relative overflow-hidden">
+        <GlowOrbs variant="light" />
+        <div className="relative z-10 flex flex-col gap-4">
+          <Reveal>
+            <h2 className="text-2xl font-semibold text-stone-900">Our Approach</h2>
+          </Reveal>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {FIRM.approach.map((pillar, i) => (
+              <Reveal key={pillar.title} delay={i * 0.08}>
+                <div className="glow-gold glass h-full rounded-md p-5">
+                  <h3 className="font-semibold text-stone-900">{pillar.title}</h3>
+                  <p className="mt-1 text-sm text-stone-600">{pillar.description}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 

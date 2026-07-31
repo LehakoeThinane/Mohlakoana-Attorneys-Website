@@ -10,7 +10,7 @@ const NAV_LINKS = [
 
 export function Header() {
   return (
-    <header className="glass-dark sticky top-0 z-50 border-b border-amber-500/20 text-amber-50">
+    <header className="glass-dark header-text-shadow sticky top-0 z-50 border-b border-amber-500/20 text-amber-50">
       <div className="mx-auto flex w-full max-w-5xl flex-wrap items-center justify-between gap-4 px-6 py-4">
         <Link href="/" className="flex flex-col leading-tight">
           <span className="text-lg font-semibold tracking-tight">{FIRM.name}</span>
