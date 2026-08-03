@@ -13,6 +13,14 @@ import type { NextConfig } from "next";
 // spawn EAGAIN. experimental.cpus overrides the worker count; set via
 // NEXT_BUILD_WORKERS on the server, left at Next's own default locally.
 const nextConfig: NextConfig = {
+  // Temporary escape hatch: builds a plain static export (no Node server
+  // required) so the marketing site can go live while the CloudLinux Node
+  // Selector / LiteSpeed integration on the host is broken. The portal route
+  // group must be physically absent from src/app for this build (static
+  // export can't include /portal/matters/[id] or Server Actions), and
+  // contact/page.tsx swaps in a static fallback instead of the form. Unset
+  // once the Node app is actually running again.
+  ...(process.env.STATIC_EXPORT === "1" ? { output: "export" } : {}),
   ...(process.env.TURBOPACK_ROOT ? { turbopack: { root: process.env.TURBOPACK_ROOT } } : {}),
   ...(process.env.NEXT_BUILD_WORKERS
     ? { experimental: { cpus: Number(process.env.NEXT_BUILD_WORKERS) } }
