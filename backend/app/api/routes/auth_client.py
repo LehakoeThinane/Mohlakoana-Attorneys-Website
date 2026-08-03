@@ -1,7 +1,7 @@
 import logging
 import secrets
 import uuid
-from datetime import UTC, datetime, timedelta
+from datetime import timedelta
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
@@ -14,6 +14,7 @@ from app.core.security import (
     hash_password,
     verify_password,
 )
+from app.core.time import utc_now
 from app.database import get_db
 from app.models.client import Client
 from app.schemas.auth import (
@@ -40,13 +41,13 @@ def _consume_action_token(db: Session, token: str, password: str) -> Client:
     client = db.query(Client).filter(Client.invite_token == token).first()
     if client is None or client.invite_token_expires_at is None:
         raise _bad_token
-    if client.invite_token_expires_at < datetime.now(UTC):
+    if client.invite_token_expires_at < utc_now():
         raise _bad_token
 
     client.hashed_password = hash_password(password)
     client.invite_token = None
     client.invite_token_expires_at = None
-    client.portal_activated_at = client.portal_activated_at or datetime.now(UTC)
+    client.portal_activated_at = client.portal_activated_at or utc_now()
     db.commit()
     return client
 
@@ -71,7 +72,7 @@ def request_password_reset(body: RequestPasswordResetRequest, db: Session = Depe
     client = db.query(Client).filter(Client.email == body.email).first()
     if client is not None and client.is_active:
         client.invite_token = secrets.token_urlsafe(32)
-        client.invite_token_expires_at = datetime.now(UTC) + timedelta(hours=RESET_TOKEN_TTL_HOURS)
+        client.invite_token_expires_at = utc_now() + timedelta(hours=RESET_TOKEN_TTL_HOURS)
         db.commit()
         logger.info("Password reset token generated for client %s (email delivery not yet wired)", client.id)
     return {"detail": "If an account exists for that email, a reset link has been sent."}

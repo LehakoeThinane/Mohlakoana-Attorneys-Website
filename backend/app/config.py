@@ -6,8 +6,8 @@ class Settings(BaseSettings):
 
     environment: str = "development"
 
-    database_url: str = "postgresql+psycopg://mohlakoana:mohlakoana@localhost:5432/mohlakoana"
-    test_database_url: str = "postgresql+psycopg://mohlakoana:mohlakoana@localhost:5432/mohlakoana_test"
+    database_url: str = "mysql+pymysql://mohlakoana:mohlakoana@localhost:3306/mohlakoana"
+    test_database_url: str = "mysql+pymysql://mohlakoana:mohlakoana@localhost:3306/mohlakoana_test"
 
     staff_jwt_secret: str = "change-me-staff-secret"
     client_jwt_secret: str = "change-me-client-secret"
