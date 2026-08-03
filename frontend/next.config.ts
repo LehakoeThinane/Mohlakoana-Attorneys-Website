@@ -20,7 +20,7 @@ const nextConfig: NextConfig = {
   // export can't include /portal/matters/[id] or Server Actions), and
   // contact/page.tsx swaps in a static fallback instead of the form. Unset
   // once the Node app is actually running again.
-  ...(process.env.STATIC_EXPORT === "1" ? { output: "export" } : {}),
+  ...(process.env.STATIC_EXPORT === "1" ? { output: "export", trailingSlash: true } : {}),
   ...(process.env.TURBOPACK_ROOT ? { turbopack: { root: process.env.TURBOPACK_ROOT } } : {}),
   ...(process.env.NEXT_BUILD_WORKERS
     ? { experimental: { cpus: Number(process.env.NEXT_BUILD_WORKERS) } }
