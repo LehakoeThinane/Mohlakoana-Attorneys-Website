@@ -79,7 +79,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {FIRM.approach.map((pillar, i) => (
               <Reveal key={pillar.title} delay={i * 0.08}>
-                <div className="glow-gold glass h-full rounded-md p-5">
+                <div className="h-full rounded-md border border-amber-900/10 bg-white p-5 shadow-sm">
                   <h3 className="font-semibold text-stone-900">{pillar.title}</h3>
                   <p className="mt-1 text-sm text-stone-600">{pillar.description}</p>
                 </div>
