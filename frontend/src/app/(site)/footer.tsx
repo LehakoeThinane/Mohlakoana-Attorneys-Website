@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { FIRM } from "@/lib/firm";
 import { PRACTICE_AREAS } from "@/lib/practice-areas";
@@ -8,6 +9,7 @@ export function Footer() {
       <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-400/60 to-transparent" />
       <div className="mx-auto grid w-full max-w-5xl grid-cols-1 gap-8 px-6 py-12 sm:grid-cols-3">
         <div className="flex flex-col gap-2">
+          <Image src="/logo-mark.png" alt="" width={56} height={39} className="mb-1 h-10 w-auto" />
           <span className="text-base font-semibold text-amber-50">{FIRM.name}</span>
           <p className="text-sm">
             {FIRM.address.line1}

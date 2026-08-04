@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { FIRM } from "@/lib/firm";
 
@@ -12,9 +13,12 @@ export function Header() {
   return (
     <header className="glass-dark header-text-shadow sticky top-0 z-50 border-b border-amber-500/20 text-amber-50">
       <div className="mx-auto flex w-full max-w-5xl flex-wrap items-center justify-between gap-4 px-6 py-4">
-        <Link href="/" className="flex flex-col leading-tight">
-          <span className="text-lg font-semibold tracking-tight">{FIRM.name}</span>
-          <span className="text-xs text-amber-200">Attorneys</span>
+        <Link href="/" className="flex items-center gap-3 leading-tight">
+          <Image src="/logo-mark.png" alt="" width={48} height={34} className="h-9 w-auto" priority />
+          <span className="flex flex-col">
+            <span className="text-lg font-semibold tracking-tight">{FIRM.name}</span>
+            <span className="text-xs text-amber-200">Attorneys</span>
+          </span>
         </Link>
         <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
           {NAV_LINKS.map((link) => (

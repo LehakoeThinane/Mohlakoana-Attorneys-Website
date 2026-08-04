@@ -13,6 +13,11 @@ import type { NextConfig } from "next";
 // spawn EAGAIN. experimental.cpus overrides the worker count; set via
 // NEXT_BUILD_WORKERS on the server, left at Next's own default locally.
 const nextConfig: NextConfig = {
+  // next/image's default loader needs a running Node server to resize
+  // images on demand. Static export has none, and the shared host's Node
+  // integration is unreliable anyway, so images are served at native size
+  // instead of disabling next/image entirely for the static-export path.
+  images: { unoptimized: true },
   // Temporary escape hatch: builds a plain static export (no Node server
   // required) so the marketing site can go live while the CloudLinux Node
   // Selector / LiteSpeed integration on the host is broken. The portal route
