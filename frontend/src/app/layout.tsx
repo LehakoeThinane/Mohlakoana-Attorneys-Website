@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Mohlakoana Attorneys",
-  description: "Attorneys, Notaries & Conveyancers",
+  description: "Attorneys",
 };
 
 export default function RootLayout({

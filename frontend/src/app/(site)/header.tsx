@@ -14,7 +14,7 @@ export function Header() {
       <div className="mx-auto flex w-full max-w-5xl flex-wrap items-center justify-between gap-4 px-6 py-4">
         <Link href="/" className="flex flex-col leading-tight">
           <span className="text-lg font-semibold tracking-tight">{FIRM.name}</span>
-          <span className="text-xs text-amber-200">Attorneys, Notaries &amp; Conveyancers</span>
+          <span className="text-xs text-amber-200">Attorneys</span>
         </Link>
         <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
           {NAV_LINKS.map((link) => (
