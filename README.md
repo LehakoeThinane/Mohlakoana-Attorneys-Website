@@ -4,15 +4,15 @@ See [docs/mohlakoana_attorneys_website_roadmap.md](docs/mohlakoana_attorneys_web
 
 ## Architecture, in one paragraph
 
-Two front doors (public site, client portal) talk to one FastAPI backend — the only choke point in the system. The backend owns its own Postgres database, which holds every sensitive field (ID numbers, matter substance) and has **no outgoing connection to anything** — that boundary is deliberate, not a gap to fill in later. A separate BFP sync adapter is the only thing that talks to BiznizFlowPilot (the firm's external CRM/ERP), and it only ever forwards what BFP's CRM/task/invoice modules need: names, emails, task descriptions, invoice line items. Nothing else reaches BFP, ever.
+Two front doors (public site, client portal) talk to one FastAPI backend — the only choke point in the system. The backend owns its own MySQL database, which holds every sensitive field (ID numbers, matter substance) and has **no outgoing connection to anything** — that boundary is deliberate, not a gap to fill in later. A separate BFP sync adapter is the only thing that talks to BiznizFlowPilot (the firm's external CRM/ERP), and it only ever forwards what BFP's CRM/task/invoice modules need: names, emails, task descriptions, invoice line items. Nothing else reaches BFP, ever.
 
 ## Repo layout
 
 ```
-backend/     FastAPI + Postgres + Alembic — Clients, Staff, Matters, dual JWT auth
+backend/     FastAPI + MySQL + Alembic — Clients, Staff, Matters, dual JWT auth
 frontend/    Next.js public site (App Router, TypeScript, Tailwind)
 docs/        Roadmap and architecture diagram
-docker-compose.yml   Local Postgres for development and tests
+docker-compose.yml   Local MySQL for development and tests
 ```
 
 ## Local setup
@@ -25,14 +25,14 @@ python -m venv .venv && .venv/Scripts/activate   # or source .venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env   # fill in real secrets before anything but local dev
 
-docker compose up -d          # starts Postgres (from repo root)
+docker compose up -d          # starts MySQL (from repo root)
 alembic upgrade head
 python scripts/seed_admin.py you@mohlakoana.co.za "a-strong-password" "Your Name"
 
 uvicorn app.main:app --reload
 ```
 
-Tests run against a separate `mohlakoana_test` database (created automatically by the Postgres container):
+Tests run against a separate `mohlakoana_test` database (created automatically by the MySQL container):
 
 ```bash
 pytest
@@ -49,10 +49,10 @@ npm run dev
 
 ## Where things stand (Phase 1)
 
-- [x] Postgres + FastAPI backend scaffolded
+- [x] MySQL + FastAPI backend scaffolded
 - [x] `Clients`, `Staff`, `Matters` tables + initial Alembic migration
 - [x] Dual JWT auth — separate signing secrets and token audiences for staff vs. client-portal logins
-- [x] CI running `pytest` + `ruff` against a real Postgres service container
+- [x] CI running `pytest` + `ruff` against a real MySQL service container
 - [x] Next.js public site skeleton
 - [ ] Staging environment
 - [ ] Phase 2 content and pages (contact form is wired up; practice-area pages are not written yet)

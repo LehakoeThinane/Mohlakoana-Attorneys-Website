@@ -10,16 +10,17 @@ jobs:
   backend:
     runs-on: ubuntu-latest
     services:
-      postgres:
-        image: postgres:16-alpine
+      mysql:
+        image: mysql:8.0
         env:
-          POSTGRES_USER: mohlakoana
-          POSTGRES_PASSWORD: mohlakoana
-          POSTGRES_DB: mohlakoana_test
+          MYSQL_USER: mohlakoana
+          MYSQL_PASSWORD: mohlakoana
+          MYSQL_DATABASE: mohlakoana_test
+          MYSQL_ROOT_PASSWORD: root
         ports:
-          - 5432:5432
+          - 3306:3306
         options: >-
-          --health-cmd pg_isready
+          --health-cmd "mysqladmin ping"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
@@ -35,7 +36,7 @@ jobs:
       - run: ruff check .
       - run: pytest
         env:
-          TEST_DATABASE_URL: postgresql+psycopg://mohlakoana:mohlakoana@localhost:5432/mohlakoana_test
+          TEST_DATABASE_URL: mysql+pymysql://mohlakoana:mohlakoana@localhost:3306/mohlakoana_test
 
   frontend:
     runs-on: ubuntu-latest

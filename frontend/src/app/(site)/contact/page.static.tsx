@@ -1,8 +1,11 @@
+// Swapped in for page.tsx only during a STATIC_EXPORT build (see
+// scripts/static-export.sh). Static export can't include Server Actions,
+// so this drops the ContactForm import/usage entirely rather than just
+// hiding it at runtime — a conditional render still bundles the action.
 import type { Metadata } from "next";
 import { FIRM } from "@/lib/firm";
 import { GlowOrbs } from "../glow-orbs";
 import { Reveal } from "../reveal";
-import { ContactForm } from "./contact-form";
 
 export const metadata: Metadata = {
   title: "Contact Us | Mohlakoana Attorneys",
@@ -20,7 +23,13 @@ export default function ContactPage() {
             <p className="text-stone-700">Tell us about your matter and we&apos;ll respond as soon as possible.</p>
           </div>
           <div className="glow-gold glass rounded-md p-6">
-            <ContactForm />
+            <p className="text-stone-700">
+              Our online form is temporarily unavailable. Please reach us directly at{" "}
+              <a className="underline" href={`mailto:${FIRM.emails[0]}`}>
+                {FIRM.emails[0]}
+              </a>{" "}
+              or {FIRM.phoneIntl}.
+            </p>
           </div>
         </Reveal>
 

@@ -1,3 +1,5 @@
+import uuid
+
 from app.core.security import hash_password
 from app.models.client import Client
 from app.models.staff import Staff
@@ -117,7 +119,7 @@ def test_password_reset_flow(client, db_session):
     assert reset_request.status_code == 202
 
     db_session.expire_all()
-    stored_client = db_session.get(Client, client_id)
+    stored_client = db_session.get(Client, uuid.UUID(client_id))
     reset_token = stored_client.invite_token
     assert reset_token is not None
 

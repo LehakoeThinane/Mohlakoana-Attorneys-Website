@@ -4,10 +4,11 @@ import { PRACTICE_AREAS } from "@/lib/practice-areas";
 
 export function Footer() {
   return (
-    <footer className="border-t border-stone-200 bg-stone-900 text-amber-100">
+    <footer className="relative overflow-hidden border-t border-amber-500/20 bg-stone-900 text-amber-100">
+      <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-400/60 to-transparent" />
       <div className="mx-auto grid w-full max-w-5xl grid-cols-1 gap-8 px-6 py-12 sm:grid-cols-3">
         <div className="flex flex-col gap-2">
-          <span className="text-base font-semibold text-amber-50">{FIRM.name}</span>
+          <p className="text-base font-semibold">{FIRM.name}</p>
           <p className="text-sm">
             {FIRM.address.line1}
             <br />

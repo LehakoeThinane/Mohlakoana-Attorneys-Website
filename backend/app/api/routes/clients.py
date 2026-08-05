@@ -1,11 +1,12 @@
 import secrets
 import uuid
-from datetime import UTC, datetime, timedelta
+from datetime import timedelta
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.core.deps import get_current_staff
+from app.core.time import utc_now
 from app.database import get_db
 from app.models.client import Client
 from app.schemas.client import ClientCreate, ClientOut
@@ -58,6 +59,6 @@ def invite_client(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Client not found")
 
     client.invite_token = secrets.token_urlsafe(32)
-    client.invite_token_expires_at = datetime.now(UTC) + timedelta(hours=INVITE_TOKEN_TTL_HOURS)
+    client.invite_token_expires_at = utc_now() + timedelta(hours=INVITE_TOKEN_TTL_HOURS)
     db.commit()
     return {"invite_token": client.invite_token}

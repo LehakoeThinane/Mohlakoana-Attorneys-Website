@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { FIRM } from "@/lib/firm";
+import { GlowOrbs } from "../glow-orbs";
+import { Reveal } from "../reveal";
 
 export const metadata: Metadata = {
   title: "About Us | Mohlakoana Attorneys",
@@ -9,7 +11,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col gap-16 px-6 py-16">
-      <section className="flex flex-col gap-4">
+      <Reveal className="flex flex-col gap-4">
         <h1 className="text-3xl font-semibold text-stone-900">About the Firm</h1>
         <p className="text-stone-700">
           {FIRM.name} is a commercial law firm based in the heart of Pretoria, Gauteng Province. The firm
@@ -26,32 +28,37 @@ export default function AboutPage() {
           immigration, family and matrimonial law, governance risk and compliance services, and Court
           appearances.
         </p>
-      </section>
+      </Reveal>
 
-      <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold text-stone-900">Director</h2>
-        <div className="rounded-md border border-stone-200 bg-white p-6">
-          <h3 className="text-lg font-semibold text-stone-900">{FIRM.director.name}</h3>
-          <p className="mt-1 text-sm text-stone-600">
-            Admitted Attorney of the High Court of South Africa — LPC number: {FIRM.director.lpcNumber}
-          </p>
+      <div className="flex flex-col gap-4">
+        <Reveal>
+          <h2 className="text-2xl font-semibold text-stone-900">Director</h2>
+        </Reveal>
+        <Reveal className="relative overflow-hidden rounded-md">
+          <GlowOrbs variant="light" />
+          <div className="glow-gold glass relative z-10 rounded-md p-6">
+            <h3 className="text-lg font-semibold text-stone-900">{FIRM.director.name}</h3>
+            <p className="mt-1 text-sm text-stone-600">
+              Admitted Attorney of the High Court of South Africa, LPC number: {FIRM.director.lpcNumber}
+            </p>
 
-          <h4 className="mt-4 text-sm font-semibold text-stone-900">Qualifications</h4>
-          <ul className="mt-2 list-disc pl-5 text-sm text-stone-700">
-            {FIRM.director.qualifications.map((q) => (
-              <li key={q}>{q}</li>
-            ))}
-          </ul>
+            <h4 className="mt-4 text-sm font-semibold text-stone-900">Qualifications</h4>
+            <ul className="mt-2 list-disc pl-5 text-sm text-stone-700">
+              {FIRM.director.qualifications.map((q) => (
+                <li key={q}>{q}</li>
+              ))}
+            </ul>
 
-          <p className="mt-4 text-sm text-stone-700">
-            Mr Mohlakoana supervises all matters undertaken by the firm. His practice focus includes{" "}
-            {FIRM.director.focus.toLowerCase()} All instructions are executed with direct oversight to ensure
-            consistency and compliance with the Legal Practice Act and Rules of the Court.
-          </p>
-        </div>
-      </section>
+            <p className="mt-4 text-sm text-stone-700">
+              Mr Mohlakoana supervises all matters undertaken by the firm. His practice focus includes{" "}
+              {FIRM.director.focus.toLowerCase()} All instructions are executed with direct oversight to ensure
+              consistency and compliance with the Legal Practice Act and Rules of the Court.
+            </p>
+          </div>
+        </Reveal>
+      </div>
 
-      <section className="flex flex-col gap-4">
+      <Reveal className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold text-stone-900">Support Staff</h2>
         <p className="text-stone-700">
           In order to ensure that the mandates of clients are executed expeditiously and with due diligence, Mr
@@ -61,28 +68,35 @@ export default function AboutPage() {
           Mrs Mohlakoana ensures that all mandates and instructions are brought to Mr Mohlakoana&apos;s attention
           without delay, treated with urgency, and that clients are kept abreast of developments in their cases.
         </p>
-      </section>
+      </Reveal>
 
-      <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold text-stone-900">Our Approach</h2>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {FIRM.approach.map((pillar) => (
-            <div key={pillar.title} className="rounded-md border border-stone-200 bg-white p-5">
-              <h3 className="font-semibold text-stone-900">{pillar.title}</h3>
-              <p className="mt-1 text-sm text-stone-600">{pillar.description}</p>
-            </div>
-          ))}
+      <section className="relative overflow-hidden">
+        <GlowOrbs variant="light" />
+        <div className="relative z-10 flex flex-col gap-4">
+          <Reveal>
+            <h2 className="text-2xl font-semibold text-stone-900">Our Approach</h2>
+          </Reveal>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {FIRM.approach.map((pillar, i) => (
+              <Reveal key={pillar.title} delay={i * 0.08}>
+                <div className="h-full rounded-md border border-amber-900/10 bg-white p-5 shadow-sm">
+                  <h3 className="font-semibold text-stone-900">{pillar.title}</h3>
+                  <p className="mt-1 text-sm text-stone-600">{pillar.description}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="flex flex-col gap-3">
+      <Reveal className="flex flex-col gap-3">
         <h2 className="text-2xl font-semibold text-stone-900">Compliance &amp; Accreditation</h2>
         <ul className="list-disc pl-5 text-stone-700">
           {FIRM.compliance.map((item) => (
             <li key={item}>{item}</li>
           ))}
         </ul>
-      </section>
+      </Reveal>
     </div>
   );
 }

@@ -1,82 +1,74 @@
 import Link from "next/link";
 import { FIRM } from "@/lib/firm";
 import { PRACTICE_AREAS } from "@/lib/practice-areas";
+import { GlowOrbs } from "./glow-orbs";
+import { Hero } from "./hero";
+import { Reveal } from "./reveal";
 
 export default function Home() {
   return (
     <>
-      <section className="border-b border-stone-200 bg-stone-900 text-amber-50">
-        <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-6 py-20">
-          <h1 className="max-w-2xl text-4xl font-semibold tracking-tight sm:text-5xl">
-            Conservative, risk-conscious legal counsel in Pretoria.
-          </h1>
-          <p className="max-w-xl text-lg text-amber-100">
-            {FIRM.name} advises individuals, directors, SMEs, corporate clients, and government departments —
-            with legal risk identified early, managed prudently, and resolved efficiently.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <Link
-              href="/contact"
-              className="rounded-md bg-amber-50 px-5 py-3 font-medium text-stone-900 transition-colors hover:bg-amber-100"
-            >
-              Get in touch
-            </Link>
-            <Link
-              href="/practice-areas"
-              className="rounded-md border border-amber-100 px-5 py-3 font-medium text-amber-50 transition-colors hover:border-amber-300 hover:text-amber-300"
-            >
-              View practice areas
-            </Link>
+      <Hero />
+
+      <section className="relative overflow-hidden">
+        <GlowOrbs variant="light" />
+        <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col gap-6 px-6 py-16">
+          <Reveal>
+            <h2 className="text-2xl font-semibold text-stone-900">Our approach</h2>
+          </Reveal>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {FIRM.approach.map((pillar, i) => (
+              <Reveal key={pillar.title} delay={i * 0.08}>
+                <div className="h-full rounded-md border border-amber-900/10 bg-white p-5 shadow-sm">
+                  <h3 className="font-semibold text-stone-900">{pillar.title}</h3>
+                  <p className="mt-1 text-sm text-stone-600">{pillar.description}</p>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-6 py-16">
-        <h2 className="text-2xl font-semibold text-stone-900">Our approach</h2>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {FIRM.approach.map((pillar) => (
-            <div key={pillar.title} className="rounded-md border border-stone-200 bg-white p-5">
-              <h3 className="font-semibold text-stone-900">{pillar.title}</h3>
-              <p className="mt-1 text-sm text-stone-600">{pillar.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-white">
-        <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-6 py-16">
-          <div className="flex items-baseline justify-between">
-            <h2 className="text-2xl font-semibold text-stone-900">Practice areas</h2>
-            <Link href="/practice-areas" className="text-sm font-medium text-stone-700 underline">
-              View all
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {PRACTICE_AREAS.map((area) => (
-              <Link
-                key={area.slug}
-                href={`/practice-areas/${area.slug}`}
-                className="flex flex-col gap-2 rounded-md border border-stone-200 p-5 transition-colors hover:border-stone-400"
-              >
-                <h3 className="font-semibold text-stone-900">{area.title}</h3>
-                <p className="text-sm text-stone-600">{area.summary}</p>
+      <section className="relative overflow-hidden bg-white">
+        <GlowOrbs variant="light" />
+        <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col gap-6 px-6 py-16">
+          <Reveal>
+            <div className="flex items-baseline justify-between">
+              <h2 className="text-2xl font-semibold text-stone-900">Practice areas</h2>
+              <Link href="/practice-areas" className="text-sm font-medium text-stone-700 underline">
+                View all
               </Link>
+            </div>
+          </Reveal>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {PRACTICE_AREAS.map((area, i) => (
+              <Reveal key={area.slug} delay={(i % 3) * 0.08}>
+                <Link
+                  href={`/practice-areas/${area.slug}`}
+                  className="glow-gold glass flex h-full flex-col gap-2 rounded-md p-5 transition-transform duration-300 hover:-translate-y-1"
+                >
+                  <h3 className="font-semibold text-stone-900">{area.title}</h3>
+                  <p className="text-sm text-stone-600">{area.summary}</p>
+                </Link>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
       <section className="mx-auto flex w-full max-w-5xl flex-col gap-4 px-6 py-16">
-        <h2 className="text-2xl font-semibold text-stone-900">About the firm</h2>
-        <p className="max-w-3xl text-stone-700">
-          {FIRM.name} is a commercial law firm based in the heart of Pretoria, Gauteng Province, led by director{" "}
-          {FIRM.director.name}. The firm maintains a focused practice across corporate, commercial, contract,
-          labour, insolvency, immigration, family, and pension law, alongside governance risk and compliance
-          services and Court appearances.
-        </p>
-        <Link href="/about" className="w-fit text-sm font-medium text-stone-900 underline">
-          Read more about the firm and our director →
-        </Link>
+        <Reveal>
+          <h2 className="text-2xl font-semibold text-stone-900">About the firm</h2>
+          <p className="mt-4 max-w-3xl text-stone-700">
+            {FIRM.name} is a commercial law firm based in the heart of Pretoria, Gauteng Province, led by director{" "}
+            {FIRM.director.name}. The firm maintains a focused practice across corporate, commercial, contract,
+            labour, insolvency, immigration, family, and pension law, alongside governance risk and compliance
+            services and Court appearances.
+          </p>
+          <Link href="/about" className="mt-4 inline-block w-fit text-sm font-medium text-stone-900 underline">
+            Read more about the firm and our director →
+          </Link>
+        </Reveal>
       </section>
     </>
   );

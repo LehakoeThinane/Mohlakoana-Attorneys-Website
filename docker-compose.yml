@@ -1,15 +1,16 @@
 services:
-  postgres:
-    image: postgres:16-alpine
+  mysql:
+    image: mysql:8.0
     environment:
-      POSTGRES_USER: mohlakoana
-      POSTGRES_PASSWORD: mohlakoana
-      POSTGRES_DB: mohlakoana
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: mohlakoana
+      MYSQL_PASSWORD: mohlakoana
+      MYSQL_DATABASE: mohlakoana
     ports:
-      - "5432:5432"
+      - "3306:3306"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - mysql_data:/var/lib/mysql
       - ./docker/init-test-db.sql:/docker-entrypoint-initdb.d/init-test-db.sql
 
 volumes:
-  postgres_data:
+  mysql_data:
