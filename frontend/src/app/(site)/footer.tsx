@@ -9,7 +9,7 @@ export function Footer() {
       <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-400/60 to-transparent" />
       <div className="mx-auto grid w-full max-w-5xl grid-cols-1 gap-8 px-6 py-12 sm:grid-cols-3">
         <div className="flex flex-col gap-2">
-          <Image src="/logo-full.png" alt={FIRM.name} width={427} height={323} className="h-24 w-auto" />
+          <Image src="/logo-full.png" alt={FIRM.name} width={427} height={323} className="-ml-2 h-[82px] w-auto" />
           <p className="text-sm">
             {FIRM.address.line1}
             <br />
